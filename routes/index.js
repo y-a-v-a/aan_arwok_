@@ -9,44 +9,28 @@ var localizeOptions = {
 
 var title = 'On Kawara font';
 
-function getTheme() {
-  var options = [
-    'white-on-gray',
-    'white-on-red',
-    'white-on-greenish'
-  ];
-
-  var randomIndex = Math.floor(Math.random() * 3);
-  return options[randomIndex];
-}
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var today = (new Date()).toLocaleDateString('en-US', localizeOptions).replace(/ /g, '');
-  var theme = getTheme();
 
   const responseData = {
     title: title,
     date: today,
-    theme: theme
+    theme: res.locals.theme
   };
 
   res.render('index', responseData);
 });
 
 router.get('/about', function(req, res, next) {
-  var theme = getTheme();
   res.render('about', {
-    title: `${title} about`,
-    theme: theme
+    title: `${title} about`
   });
 });
 
 router.get('/download', function(req, res, next) {
-  var theme = getTheme();
   res.render('download', {
-    title: `${title} download`,
-    theme: theme
+    title: `${title} download`
   });
 });
 

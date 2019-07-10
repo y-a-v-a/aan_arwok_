@@ -1,8 +1,12 @@
 doctype html
-html
+html(lang='en-US')
   head
     meta(charset='utf-8')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body(class=theme ? theme : 'white-on-gray' class=['with-on-kawara-font'])
+    style.
+      body, a, a:visited, a:active { color: !{theme.fg}; }
+      body { background-color: !{theme.bg}; }
+      a:hover { color: #aaa; }
+  body(class='with-on-kawara-font')
     block content

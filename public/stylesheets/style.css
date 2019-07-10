@@ -26,8 +26,14 @@ Date painting color variants
   * white on gray: #f1f1f1 on #383838
   * white on red: #e2e2e2 on #cd3838
   * white on greenish: #e2e3e4 on #323b3f
-*/
 
+  white on red #e3e3e3
+  red bg #cd331d
+
+  white on black #ededed on #21211e
+
+*/
+/*
 .white-on-gray {
   color: #f1f1f1;
   background-color: #383838;
@@ -71,7 +77,7 @@ Date painting color variants
 
 .white-on-greenish a:hover {
   color: #fff;
-}
+} */
 
 .canvas {
   width: 100%;
