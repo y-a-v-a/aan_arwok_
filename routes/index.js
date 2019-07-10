@@ -7,11 +7,12 @@ var localizeOptions = {
   day: 'numeric'
 };
 
-var today = (new Date()).toLocaleDateString('en-US', localizeOptions);
 var title = 'On Kawara font';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  var today = (new Date()).toLocaleDateString('en-US', localizeOptions);
+
   const responseData = {
     title: title,
     date: today
