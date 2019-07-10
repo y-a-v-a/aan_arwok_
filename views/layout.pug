@@ -4,5 +4,5 @@ html
     meta(charset='utf-8')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body(class='white-on-gray with-on-kawara-font')
+  body(class=theme ? theme : 'white-on-gray' class=['with-on-kawara-font'])
     block content
