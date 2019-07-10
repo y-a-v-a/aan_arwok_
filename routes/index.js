@@ -22,7 +22,7 @@ function getTheme() {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var today = (new Date()).toLocaleDateString('en-US', localizeOptions);
+  var today = (new Date()).toLocaleDateString('en-US', localizeOptions).replace(/ /g, '');
   var theme = getTheme();
 
   const responseData = {
