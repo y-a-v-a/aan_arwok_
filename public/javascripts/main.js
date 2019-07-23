@@ -20,8 +20,7 @@
       'en-US',
       'fr-FR',
       'es-ES',
-      'en-UK',
-      'no'
+      'en-UK'
     ];
 
     return {
@@ -63,14 +62,14 @@
     var today = new Date();
     var localeDate = today.toLocaleDateString(locale, options);
 
-    return localeDate;
+    return localeDate.replace(/ /g, '');
   }
 
   var Locales = setupLocales();
   var locale = Locales.randomLocale;
 
   var dateContainer = document.getElementById('today-series')
-  // dateContainer.innerText = getLocalizedDate(locale);
-  // dateContainer.dataset.locale = locale;
+  dateContainer.innerText = getLocalizedDate(locale);
+  dateContainer.dataset.locale = locale;
 
 }());

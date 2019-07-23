@@ -8,6 +8,8 @@
 * Link to Github page
 * Link to instagram account aan_arwok_
 
+I can't recall the first time I had an encounter with an Today series painting from On Kawara, but I do know that since I had seen them, I really liked these simple paintings.
+
 # License
 copyright 2018-2019 Vincent Bruijn <vebruijn@gmail.com> Yet Another Visual Artist
 
