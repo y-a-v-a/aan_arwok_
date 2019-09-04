@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "fetch": "DEBUG=fetch node ./fetch.js"
   },
   "dependencies": {
     "body-parser": "~1.19.0",
@@ -13,5 +14,8 @@
     "morgan": "~1.9.1",
     "pug": "^2.0.3",
     "serve-favicon": "~2.5.0"
+  },
+  "devDependencies": {
+    "glob": "^7.1.4"
   }
 }
