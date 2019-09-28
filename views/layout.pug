@@ -5,6 +5,10 @@ html(lang='en-US')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     style.
+      @font-face {
+        font-family: OnKawara;
+        src: url("/fonts/OnKawara-Regular#{fontVersion}.otf") format("opentype");
+      }
       body, a, a:visited, a:active { color: !{theme.fg}; }
       body { background-color: !{theme.bg}; }
       a:hover { color: #aaa; }

@@ -64,20 +64,12 @@ async function main() {
           debug(`Duplicated ${targetPath} to ${baseName}, express.static cannot serve symlinks...(?)`);
 
           debug('Done');
+
+          fs.writeFileSync('./font-version', newVersion);
         }
       });
-
-      // // cleanup symlink
-      // debug('Unlink original symlink');
-      // fs.unlinkSync(baseName);
-
-      // // create new symlink
-      // fs.symlinkSync(targetPath, baseName);
-
-      // debug('Done');
     }
   });
-
 }
 
 // call main function

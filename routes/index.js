@@ -11,12 +11,13 @@ var title = 'On Kawara font';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var today = (new Date()).toLocaleDateString('en-US', localizeOptions).replace(/ /g, '');
+  const today = (new Date()).toLocaleDateString('en-US', localizeOptions).replace(/ /g, '');
 
   const responseData = {
-    title: title,
+    title,
     date: today,
-    theme: res.locals.theme
+    theme: res.locals.theme,
+    fontVersion: req.app.get('font-version')
   };
 
   res.render('index', responseData);
@@ -24,13 +25,15 @@ router.get('/', function(req, res, next) {
 
 router.get('/about', function(req, res, next) {
   res.render('about', {
-    title: `${title} about`
+    title: `${title} about`,
+    fontVersion: req.app.get('font-version')
   });
 });
 
 router.get('/download', function(req, res, next) {
   res.render('download', {
-    title: `${title} download`
+    title: `${title} download`,
+    fontVersion: req.app.get('font-version')
   });
 });
 

@@ -4,11 +4,22 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
+
+var app = express();
+
+var fontVersionFile = './font-version';
+var fontVersion = '0.0.0';
+try {
+  var fontVersion = fs.readFileSync(fontVersionFile);
+  app.set('font-version', `-${fontVersion}`);
+} catch(e) {
+  console.log(`Unable to read file: ${fontVersionFile}`);
+  process.exit(1);
+}
 
 var routes = require('./routes/index');
 var themes = require('./themes');
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,7 +46,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 // error handlers
 
