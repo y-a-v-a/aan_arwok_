@@ -65,6 +65,8 @@ async function main() {
 
           debug('Done');
 
+          // store the new version in a file to be used
+          // by the webapp to serve the latest version
           fs.writeFileSync('./font-version', newVersion);
         }
       });

@@ -8,11 +8,12 @@ var fs = require('fs');
 
 var app = express();
 
+// @see fetch.js
 var fontVersionFile = './font-version';
 var fontVersion = '0.0.0';
 try {
   var fontVersion = fs.readFileSync(fontVersionFile);
-  app.set('font-version', `-${fontVersion}`);
+  app.set('font-version', fontVersion);
 } catch(e) {
   console.log(`Unable to read file: ${fontVersionFile}`);
   process.exit(1);
