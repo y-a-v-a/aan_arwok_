@@ -57,15 +57,24 @@ async function main() {
     } else {
       debug(`Copied latest font file to ${fontTarget}`);
 
-      // cleanup symlink
-      debug('Unlink original symlink');
-      fs.unlinkSync(baseName);
+      fs.copyFile(targetPath, baseName, error => {
+        if (error) {
+          throw error;
+        } else {
+          debug(`Duplicated ${targetPath} to ${baseName}, express.static cannot serve symlinks...(?)`);
 
-      // create new symlink
-      debug('Create new symlink');
-      fs.symlinkSync(targetPath, baseName);
+          debug('Done');
+        }
+      });
 
-      debug('Done');
+      // // cleanup symlink
+      // debug('Unlink original symlink');
+      // fs.unlinkSync(baseName);
+
+      // // create new symlink
+      // fs.symlinkSync(targetPath, baseName);
+
+      // debug('Done');
     }
   });
 
