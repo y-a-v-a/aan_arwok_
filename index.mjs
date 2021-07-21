@@ -15,10 +15,19 @@ debug(`Font version is ${FONT_VERSION}`);
 
 async function cleanDist() {
   debug('Cleaning dist');
+
+  try {
+    await fs.stat(DIST_DIR);
+  } catch {
+    debug('Making dist');
+    await fs.mkdir(DIST_DIR);
+  }
+
   const dirEntries = await fs.readdir(DIST_DIR);
   for (const entry of dirEntries) {
     const entryPath = `${DIST_DIR}/${entry}`;
     const stat = await fs.stat(entryPath);
+    debug(`Removing ${entryPath}`);
     if (stat.isDirectory()) {
       await fs.rm(entryPath, { recursive: true, force: true });
     } else {
@@ -48,7 +57,7 @@ async function buildPug() {
 async function copyAssets() {
   debug('Copy assets');
 
-  copyFolder(PUBLIC_DIR, DIST_DIR);
+  await copyFolder(PUBLIC_DIR, DIST_DIR);
 }
 
 async function copyFolder(from, to) {
@@ -60,17 +69,23 @@ async function copyFolder(from, to) {
 
   const dirEntries = await fs.readdir(from);
 
-  dirEntries.forEach(async (element) => {
+  const copyPromises = dirEntries.map(async (element) => {
+    if (element.endsWith('.DS_Store')) {
+      return Promise.resolve();
+    }
     const fromPath = path.join(from, element);
     const toPath = path.join(to, element);
     const elementStat = await fs.lstat(fromPath);
 
     if (elementStat.isFile()) {
+      debug(`Copy ${toPath}`);
       await fs.copyFile(fromPath, toPath);
     } else {
       await copyFolder(fromPath, toPath);
     }
   });
+
+  await Promise.all(copyPromises);
 }
 
 await cleanDist();
