@@ -2,6 +2,10 @@
   "name": "www",
   "version": "0.0.0",
   "private": true,
+  "author": {
+    "name": "Vincent Bruijn",
+    "email": "vebruijn@gmail.com"
+  },
   "scripts": {
     "build": "DEBUG=aan_arwok_ node ./index.mjs",
     "fetch": "DEBUG=fetch node ./fetch.js"

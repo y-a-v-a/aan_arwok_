@@ -10,8 +10,11 @@ const DIST_DIR = './dist';
 const VIEWS_DIR = './views';
 const PUBLIC_DIR = './public';
 
-const FONT_VERSION = await fs.readFile('./font-version', { encoding: 'utf8' });
-debug(`Font version is ${FONT_VERSION}`);
+async function getFontVersion() {
+  const fontVersion = await fs.readFile('./font-version', { encoding: 'utf8' });
+  debug(`Font version is ${fontVersion}`);
+  return fontVersion;
+}
 
 async function cleanDist() {
   debug('Cleaning dist');
@@ -38,6 +41,7 @@ async function cleanDist() {
 
 async function buildPug() {
   debug('Read views');
+  const FONT_VERSION = await getFontVersion();
   const viewFiles = await fs.readdir(VIEWS_DIR);
   const pugFiles = viewFiles.filter(
     (entry) => entry.endsWith('.pug') && !entry.startsWith('layout')
@@ -88,7 +92,11 @@ async function copyFolder(from, to) {
   await Promise.all(copyPromises);
 }
 
-await cleanDist();
-await buildPug();
-await copyAssets();
-debug('Done!');
+async function main() {
+  await cleanDist();
+  await buildPug();
+  await copyAssets();
+  debug('Done!');
+}
+
+main();
