@@ -11,12 +11,20 @@ const VIEWS_DIR = './views';
 const PUBLIC_DIR = './public';
 
 const FONT_VERSION = await fs.readFile('./font-version', { encoding: 'utf8' });
-debug(`Font version is ${FONT_VEERSION}`);
+debug(`Font version is ${FONT_VERSION}`);
 
 async function cleanDist() {
   debug('Cleaning dist');
-  await fs.rm(`${DIST_DIR}/`, { recursive: true, force: true });
-  await fs.mkdir(DIST_DIR);
+  const dirEntries = await fs.readdir(DIST_DIR);
+  for (const entry of dirEntries) {
+    const entryPath = `${DIST_DIR}/${entry}`;
+    const stat = await fs.stat(entryPath);
+    if (stat.isDirectory()) {
+      await fs.rm(entryPath, { recursive: true, force: true });
+    } else {
+      await fs.rm(entryPath);
+    }
+  }
 }
 
 async function buildPug() {
